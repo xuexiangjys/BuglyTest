@@ -10,7 +10,7 @@
 #define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,TAG ,__VA_ARGS__) // 定义LOGF类型
 
 JNIEXPORT void JNICALL
-Java_com_xuexiang_buglytest_NativeApi_testJavaCrash(JNIEnv *env, jobject instance) {
+Java_com_xuexiang_buglytest_jni_NativeApi_testJavaCrash(JNIEnv *env, jobject instance) {
 
     //获取jclass
     jclass j_class = env->GetObjectClass(instance);
@@ -26,19 +26,19 @@ Java_com_xuexiang_buglytest_NativeApi_testJavaCrash(JNIEnv *env, jobject instanc
     env->ReleaseStringUTFChars(j_stirng, value);
 }
 
-jstring global_jstring;
+
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_xuexiang_buglytest_NativeApi_testNativeCrash(JNIEnv *env, jobject instance) {
+Java_com_xuexiang_buglytest_jni_NativeApi_testNativeCrash(JNIEnv *env, jobject instance) {
 
     const char *tmp = "正走向人生巅峰！";
     jstring j_tmp = env->NewStringUTF(tmp);
 
-    global_jstring = static_cast<jstring>(env->NewGlobalRef(j_tmp));
+    jstring j_string = static_cast<jstring>(env->NewLocalRef(j_tmp));
 
-    env->DeleteGlobalRef(global_jstring);
+    env->DeleteLocalRef(j_string);
 
-    env->ReleaseStringUTFChars(global_jstring, tmp);
+    const char *value = env->GetStringUTFChars(j_string, 0);
 
 }

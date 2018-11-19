@@ -1,4 +1,4 @@
-package com.xuexiang.buglytest;
+package com.xuexiang.buglytest.jni;
 
 /**
  * @author xuexiang
