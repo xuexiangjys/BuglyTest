@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前的版本：" />
+
     <Button
         android:id="@+id/btn_check_update"
         android:layout_width="match_parent"
